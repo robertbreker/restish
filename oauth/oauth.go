@@ -68,6 +68,8 @@ func TokenHandler(source oauth2.TokenSource, key string, request *http.Request) 
 	}
 
 	// Set the auth header so the request can be made.
-	token.SetAuthHeader(request)
+	// token.SetAuthHeader(request)
+	// Robert's hack for Citrix Cloud
+	request.Header.Set("Authorization", "CwsAuth bearer="+token.AccessToken)
 	return nil
 }
